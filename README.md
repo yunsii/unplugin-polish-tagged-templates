@@ -50,15 +50,12 @@ function Component() {
 to
 
 ```tsx
-const className =
-  'cursor-pointer font-bold text-xl text-sky-500 hover:text-sky-600'
+const className = "cursor-pointer font-bold text-xl text-sky-500 hover:text-sky-600"
 
 function Component() {
   return (
     <p
-      className={
-        'cursor-pointer font-bold text-xl text-sky-500 hover:text-sky-600'
-      }
+      className={"cursor-pointer font-bold text-xl text-sky-500 hover:text-sky-600"}
       // ...
     >
       Hi
