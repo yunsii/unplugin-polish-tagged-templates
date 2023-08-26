@@ -118,7 +118,9 @@
     }
   },
   "dependencies": {
+    "consola": "^3.2.3",
     "gogocode": "^1.0.55",
+    "pathe": "^1.1.1",
     "unplugin": "^1.4.0"
   },
   "devDependencies": {

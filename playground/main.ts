@@ -3,7 +3,7 @@ import './global.css'
 import { cls } from './cls'
 
 const p1 = document.createElement('p')
-p1.className = `
+p1.className = cls`
   cursor-pointer
   font-bold text-xl
   text-sky-500
