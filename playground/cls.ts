@@ -6,8 +6,6 @@ function normalizeStrings(strings: string[]) {
     stringItem
       .split('\n')
       .map((item) => item.trim())
-      // 支持使用 // 的行注释
-      .filter((item) => !item.startsWith('//') && !!item)
       .forEach((item) => result.push(item))
   })
   return result
