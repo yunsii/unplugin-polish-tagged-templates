@@ -5,20 +5,20 @@ export interface Options {
    */
   extensions?: string[]
   /**
-   * Specific **CSS** tagged template strings to polish.
-   * There is no effect if tagged template has any variables.
+   * Specific **CSS** tagged templates strings to polish.
+   * There is no effect if tagged templates has any variables.
    */
   cssTags?: string[]
   /**
-   * Custom specific tagged template strings to polish.
+   * Custom specific tagged templates strings to polish.
    *
    * For example:
    * ```
    * tags: ["cls"]
    * ```
    *
-   * then, you can use `polish()` callback to polish cls\`hello\` like tagged template strings,
-   * the `polish()` callback will not invoked if tagged template has any variables.
+   * then, you can use `polish()` callback to polish cls\`hello\` like tagged templates,
+   * the `polish()` callback will not invoked if tagged templates has any variables.
    */
   polishTags?: PolishTag[]
 }

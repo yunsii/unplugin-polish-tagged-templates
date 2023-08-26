@@ -1,17 +1,17 @@
 {
-  "name": "unplugin-polish-string",
+  "name": "unplugin-polish-tagged-templates",
   "type": "module",
   "version": "0.1.0",
   "packageManager": "pnpm@8.6.12",
   "description": "",
   "license": "MIT",
-  "homepage": "https://github.com/yunsii/unplugin-polish-string#readme",
+  "homepage": "https://github.com/yunsii/unplugin-polish-tagged-templates#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yunsii/unplugin-polish-string.git"
+    "url": "git+https://github.com/yunsii/unplugin-polish-tagged-templates.git"
   },
   "bugs": {
-    "url": "https://github.com/yunsii/unplugin-polish-string/issues"
+    "url": "https://github.com/yunsii/unplugin-polish-tagged-templates/issues"
   },
   "keywords": [
     "unplugin",

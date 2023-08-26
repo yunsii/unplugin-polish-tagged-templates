@@ -32,7 +32,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (
   const tags = Object.keys(mergedPolishTags)
 
   return {
-    name: 'unplugin-polish-string',
+    name: 'unplugin-polish-tagged-templates',
     transformInclude(id) {
       const extensions = ['ts', 'tsx', 'js', 'jsx', ...moreExtensions]
       return extensions.some((item) => id.endsWith(`.${item}`))

@@ -1,27 +1,80 @@
-# unplugin-polish-string
+# unplugin-polish-tagged-templates
 
-[![NPM version](https://img.shields.io/npm/v/unplugin-polish-string?color=a1b858&label=)](https://www.npmjs.com/package/unplugin-polish-string)
+[![NPM version](https://img.shields.io/npm/v/unplugin-polish-tagged-templates?color=a1b858&label=)](https://www.npmjs.com/package/unplugin-polish-tagged-templates)
 
-Starter template for [unplugin](https://github.com/unjs/unplugin).
+Remove unnecessary [tagged templates](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#tagged_templates) at compile time.
 
-## Template Usage
+## Features
 
-To use this template, clone it down using:
+- 🦄 [Unified plugin](https://github.com/unjs/unplugin), support Vite/Rollup/Webpack/Nuxt/esbuild
+- 💎 polish **CSS** tagged templates as preset
+- 🛠️ Custom tagged templates to polish
 
-```bash
-npx degit yunsii/unplugin-polish-string my-unplugin
+## Example
+
+With the config:
+
+```tsx
+polishTaggedTemplates({
+  cssTags: ['cls'],
+})
 ```
 
-And do a global replacement of `unplugin-polish-string`` with your plugin name.
+It will polish code from:
 
-Then you can start developing your unplugin 🔥
+```tsx
+const className = cls`
+  cursor-pointer
+  font-bold text-xl
+  text-sky-500
+  hover:text-sky-600
+`
 
-To test your plugin, run: `pnpm run dev` To release a new version, run: `pnpm run release`
+function Component() {
+  return (
+    <p
+      className={cls`
+        cursor-pointer
+        font-bold text-xl
+        text-sky-500
+        hover:text-sky-600
+      `}
+      // ...
+    >
+      Hi
+    </p>
+  )
+}
+```
+
+to
+
+```tsx
+const className =
+  'cursor-pointer font-bold text-xl text-sky-500 hover:text-sky-600'
+
+function Component() {
+  return (
+    <p
+      className={
+        'cursor-pointer font-bold text-xl text-sky-500 hover:text-sky-600'
+      }
+      // ...
+    >
+      Hi
+    </p>
+  )
+}
+```
+
+However, there is no effect if tagged templates has any variables.
+
+This plugin make you free to use tagged templates to composite class name or others aims, and remove unnecessary tagged templates at compile time.
 
 ## Install
 
 ```bash
-npm i unplugin-polish-string
+npm i unplugin-polish-tagged-templates
 ```
 
 <details>
@@ -29,11 +82,11 @@ npm i unplugin-polish-string
 
 ```ts
 // vite.config.ts
-import Starter from 'unplugin-polish-string/vite'
+import polishTaggedTemplates from 'unplugin-polish-tagged-templates/vite'
 
 export default defineConfig({
   plugins: [
-    Starter({
+    polishTaggedTemplates({
       /* options */
     }),
   ],
@@ -49,11 +102,11 @@ Example: [`playground/`](./playground/)
 
 ```ts
 // rollup.config.js
-import Starter from 'unplugin-polish-string/rollup'
+import polishTaggedTemplates from 'unplugin-polish-tagged-templates/rollup'
 
 export default {
   plugins: [
-    Starter({
+    polishTaggedTemplates({
       /* options */
     }),
   ],
@@ -70,7 +123,7 @@ export default {
 module.exports = {
   /* ... */
   plugins: [
-    require('unplugin-polish-string/webpack')({
+    require('unplugin-polish-tagged-templates/webpack')({
       /* options */
     }),
   ],
@@ -87,7 +140,7 @@ module.exports = {
 export default defineNuxtConfig({
   modules: [
     [
-      'unplugin-polish-string/nuxt',
+      'unplugin-polish-tagged-templates/nuxt',
       {
         /* options */
       },
@@ -108,7 +161,7 @@ export default defineNuxtConfig({
 module.exports = {
   configureWebpack: {
     plugins: [
-      require('unplugin-polish-string/webpack')({
+      require('unplugin-polish-tagged-templates/webpack')({
         /* options */
       }),
     ],
@@ -124,10 +177,10 @@ module.exports = {
 ```ts
 // esbuild.config.js
 import { build } from 'esbuild'
-import Starter from 'unplugin-polish-string/esbuild'
+import polishTaggedTemplates from 'unplugin-polish-tagged-templates/esbuild'
 
 build({
-  plugins: [Starter()],
+  plugins: [polishTaggedTemplates()],
 })
 ```
 
