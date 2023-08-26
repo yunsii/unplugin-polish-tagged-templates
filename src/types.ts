@@ -21,6 +21,7 @@ export interface Options {
    * the `polish()` callback will not invoked if tagged templates has any variables.
    */
   polishTags?: PolishTag[]
+  debug?: boolean
 }
 
 export type PolishCallback = (str: string) => string | void

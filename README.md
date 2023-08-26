@@ -10,6 +10,8 @@ Remove unnecessary [tagged templates](https://developer.mozilla.org/en-US/docs/W
 - 💎 polish **CSS** tagged templates as preset
 - 🛠️ Custom tagged templates to polish
 
+> Only polish tagged templates in non-development environment.
+
 ## Example
 
 With the config:
