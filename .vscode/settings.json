@@ -1,3 +1,5 @@
 {
-  "cSpell.words": ["bumpp", "nuxt"]
+  "cSpell.words": ["bumpp", "nuxt"],
+  "tailwindCSS.experimental.classRegex": ["cls`([^`]*)"],
+  "css.lint.unknownAtRules": "ignore"
 }
