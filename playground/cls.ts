@@ -1,18 +1,27 @@
 import clsx from 'clsx'
 
 function normalizeStrings(strings: string[]) {
-  const result: string[] = []
+  let result: string[] = []
+
   strings.forEach((stringItem) => {
-    stringItem
+    const segments = stringItem
       .split('\n')
       .map((item) => item.trim())
-      .forEach((item) => result.push(item))
+      .filter((item) => !item.startsWith('//'))
+
+    segments.forEach((item) => {
+      result = result.concat(
+        item
+          .split(/[\t ]/)
+          .map((item) => item.trim())
+          .filter(Boolean),
+      )
+    })
   })
-  return result
+  return result.join(' ')
 }
 
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#tagged_templates
-export default function cls(
+export function handleCls(
   strings: TemplateStringsArray,
   ...expressions: any[]
 ) {
@@ -21,8 +30,10 @@ export default function cls(
     prev.push(current, clsx(expression))
     return prev
   }, [] as string[])
-  const result = normalizeStrings(classNamesList).join(' ')
-  return result
+  return normalizeStrings(classNamesList)
 }
 
-export { cls, clsx }
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#tagged_templates
+export function cls(strings: TemplateStringsArray, ...expressions: any[]) {
+  return handleCls(strings, ...expressions)
+}

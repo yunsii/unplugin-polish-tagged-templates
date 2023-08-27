@@ -9,6 +9,7 @@ Remove unnecessary [tagged templates](https://developer.mozilla.org/en-US/docs/W
 - 🦄 [Unified plugin](https://github.com/unjs/unplugin), support Vite/Rollup/Webpack/Nuxt/esbuild
 - 💎 polish **CSS** tagged templates as preset
 - 🛠️ Custom tagged templates to polish
+- ✨ Support comment start with `//`
 
 > Only polish tagged templates in non-development environment.
 
@@ -28,6 +29,7 @@ It will polish code from:
 const className = cls`
   cursor-pointer
   font-bold text-xl
+  // comment here
   text-sky-500
   hover:text-sky-600
 `
@@ -38,6 +40,7 @@ function Component() {
       className={cls`
         cursor-pointer
         font-bold text-xl
+        // comment here
         text-sky-500
         hover:text-sky-600
       `}

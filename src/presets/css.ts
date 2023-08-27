@@ -1,7 +1,13 @@
 export function polishCssClass(str: string) {
-  return `${str
+  return str
     .split('\n')
     .map((item) => item.trim())
-    .filter(Boolean)
-    .join(' ')}`
+    .filter((item) => {
+      // Remove comment
+      return !item.startsWith('//')
+    })
+    .map((item) => {
+      return item.replace(/[ \t]{2,}/g, ' ')
+    })
+    .join(' ')
 }
