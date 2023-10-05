@@ -1,8 +1,8 @@
 # unplugin-polish-tagged-templates
 
-[![NPM version](https://img.shields.io/npm/v/unplugin-polish-tagged-templates?color=a1b858&label=)](https://www.npmjs.com/package/unplugin-polish-tagged-templates)
-
 Remove unnecessary [tagged templates](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#tagged_templates) at compile time.
+
+[![NPM version](https://img.shields.io/npm/v/unplugin-polish-tagged-templates?color=a1b858&label=)](https://www.npmjs.com/package/unplugin-polish-tagged-templates) [![Download monthly](https://img.shields.io/npm/dm/unplugin-polish-tagged-templates.svg)](https://www.npmjs.com/package/unplugin-polish-tagged-templates)
 
 ## Features
 
