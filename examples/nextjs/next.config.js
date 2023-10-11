@@ -6,7 +6,7 @@ const nextConfig = {
     config.plugins.push(
       require('../../dist/webpack.cjs').default({
         debug: true,
-        cssTags: ['raw'],
+        clsTags: ['raw'],
       }),
     )
 

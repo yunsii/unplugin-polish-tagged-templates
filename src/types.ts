@@ -5,10 +5,10 @@ export interface Options {
    */
   extensions?: string[]
   /**
-   * Specific **CSS** tagged templates strings to polish.
+   * Specific **class names** tagged templates strings to polish.
    * There is no effect if tagged templates has any variables.
    */
-  cssTags?: string[]
+  clsTags?: string[]
   /**
    * Custom specific tagged templates strings to polish.
    *

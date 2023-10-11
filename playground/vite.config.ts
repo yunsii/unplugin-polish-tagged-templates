@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [
     Inspect(),
     Unplugin({
-      cssTags: ['cls'],
+      clsTags: ['cls'],
     }),
   ],
 })

@@ -2,9 +2,9 @@ import { createUnplugin } from 'unplugin'
 import $ from 'gogocode'
 import pathe from 'pathe'
 
-import { polishCssClass } from './presets'
 import { IS_DEV, PLUGIN_NAME } from './constants'
 import { logger } from './log'
+import { polishClsString } from './presets'
 
 import type { UnpluginFactory } from 'unplugin'
 import type { Options, PolishCallback, PolishTag } from './types'
@@ -14,7 +14,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (
 ) => {
   const {
     extensions: moreExtensions = [],
-    cssTags = [],
+    clsTags = [],
     polishTags = [] as PolishTag[],
     debug = false,
   } = options || {}
@@ -24,10 +24,10 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (
   }
 
   const mergedPolishTags = [
-    ...cssTags.map((tag) => {
+    ...clsTags.map((tag) => {
       return {
         tag,
-        polish: polishCssClass,
+        polish: polishClsString,
       }
     }),
     ...polishTags,

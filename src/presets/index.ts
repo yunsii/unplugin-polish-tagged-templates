@@ -1,1 +1,1 @@
-export { polishCssClass } from './css'
+export { polishClsString } from './cls'

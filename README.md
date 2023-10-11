@@ -7,9 +7,9 @@ Remove unnecessary [tagged templates](https://developer.mozilla.org/en-US/docs/W
 ## Features
 
 - 🦄 [Unified plugin](https://github.com/unjs/unplugin), support Vite/Rollup/Webpack/Nuxt/esbuild
-- 💎 polish **CSS** tagged templates as preset
+- 💎 polish **class names** tagged templates as preset
+  - Support comment start with `//`
 - 🛠️ Custom tagged templates to polish
-- ✨ Support comment start with `//`
 
 > Only polish tagged templates in non-development environment.
 
@@ -19,7 +19,7 @@ With the config:
 
 ```tsx
 polishTaggedTemplates({
-  cssTags: ['cls'],
+  clsTags: ['cls'],
 })
 ```
 

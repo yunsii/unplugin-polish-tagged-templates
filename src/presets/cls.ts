@@ -1,4 +1,4 @@
-export function polishCssClass(str: string) {
+export function polishClsString(str: string) {
   return str
     .split('\n')
     .map((item) => item.trim())
