@@ -3,6 +3,7 @@
     "target": "es2017",
     "module": "esnext",
     "lib": ["esnext", "DOM"],
+    "types": ["vite/client"],
     "moduleResolution": "node",
     "esModuleInterop": true,
     "strict": true,
