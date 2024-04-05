@@ -19,7 +19,7 @@ With the config:
 
 ```tsx
 polishTaggedTemplates({
-  cssTags: ['cls'],
+  clsTags: ['cls'],
 })
 ```
 
