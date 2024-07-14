@@ -1,7 +1,7 @@
 {
   "name": "unplugin-polish-tagged-templates",
   "type": "module",
-  "version": "0.1.1-beta.2",
+  "version": "0.1.1",
   "packageManager": "pnpm@8.6.12",
   "description": "Remove unnecessary tagged templates at compile time.",
   "license": "MIT",
