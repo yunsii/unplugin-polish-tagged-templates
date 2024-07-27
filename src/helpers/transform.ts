@@ -72,5 +72,5 @@ export function transformTags(code: string, options: ITransformOptions = {}) {
     return result
   })
 
-  return ms.toString()
+  return ms.hasChanged() ? ms.toString() : code
 }
