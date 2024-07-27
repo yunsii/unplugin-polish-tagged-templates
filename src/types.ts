@@ -22,6 +22,8 @@ export interface Options {
    */
   polishTags?: PolishTag[]
   debug?: boolean
+  /** Custom exclude for better performance */
+  exclude?: (id: string) => boolean
 }
 
 export type PolishCallback = (str: string) => string | void

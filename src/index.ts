@@ -16,6 +16,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (
     clsTags = [],
     polishTags = [] as PolishTag[],
     debug = false,
+    exclude,
   } = options || {}
 
   if (debug) {
@@ -31,13 +32,17 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (
       if (IS_DEV) {
         return false
       }
+      const normalizedId = pathe.normalize(id)
+      if (normalizedId.includes('node_modules')) {
+        return false
+      }
+      if (exclude && exclude(normalizedId)) {
+        return false
+      }
       const extensions = ['ts', 'tsx', 'js', 'jsx', ...moreExtensions]
       return extensions.some((item) => id.endsWith(`.${item}`))
     },
     transform(code, id) {
-      if (pathe.normalize(id).includes('node_modules')) {
-        return
-      }
       try {
         const polishCode = transformTags(code, {
           clsTags,
