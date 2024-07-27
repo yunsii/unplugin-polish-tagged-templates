@@ -17,7 +17,7 @@ export function templateStringContainsExpression(str: string) {
   return reg.test(str)
 }
 
-export function unescaseTemplateString(str: string) {
+export function unescapeTemplateString(str: string) {
   const reg = /\\(.)/gm
   return str.replace(reg, '$1')
 }
@@ -49,6 +49,8 @@ export function transformTags(code: string, options: ITransformOptions = {}) {
 
   const ms = new MagicString(code)
 
+  let transformed = false
+
   ms.replace(getTaggedTemplatesRegExp(tags), (raw, tag, str) => {
     const polishCallback = mergedPolishTags[tag]
 
@@ -60,7 +62,12 @@ export function transformTags(code: string, options: ITransformOptions = {}) {
       return raw
     }
 
-    const polishedStr = polishCallback(unescaseTemplateString(str.trim()))
+    if (!transformed) {
+      beforeTransform?.()
+      transformed = true
+    }
+
+    const polishedStr = polishCallback(unescapeTemplateString(str.trim()))
     const result = polishedStr ? `"${polishedStr}"` : raw
     return result
   })

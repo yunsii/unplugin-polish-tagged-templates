@@ -18,8 +18,6 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (
     debug = false,
   } = options || {}
 
-  const processTags = [...clsTags, ...polishTags.map((item) => item.tag)]
-
   if (debug) {
     logger.level = 4
   }
