@@ -120,6 +120,7 @@
   "dependencies": {
     "consola": "^3.2.3",
     "gogocode": "^1.0.55",
+    "magic-string": "^0.30.10",
     "pathe": "^1.1.1",
     "unplugin": "^1.4.0"
   },

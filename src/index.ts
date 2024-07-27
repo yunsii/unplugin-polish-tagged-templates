@@ -18,6 +18,8 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (
     debug = false,
   } = options || {}
 
+  const processTags = [...clsTags, ...polishTags.map((item) => item.tag)]
+
   if (debug) {
     logger.level = 4
   }
@@ -38,7 +40,6 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (
       if (pathe.normalize(id).includes('node_modules')) {
         return
       }
-
       try {
         const polishCode = transformTags(code, {
           clsTags,
