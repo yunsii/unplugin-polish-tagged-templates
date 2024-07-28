@@ -6,7 +6,7 @@ import { logger } from './log'
 import { transformTags } from './helpers/transform'
 
 import type { UnpluginFactory } from 'unplugin'
-import type { Options, PolishTag } from './types'
+import type { Options } from './types'
 
 export const unpluginFactory: UnpluginFactory<Options | undefined> = (
   options,
@@ -14,7 +14,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (
   const {
     extensions: moreExtensions = [],
     clsTags = [],
-    polishTags = [] as PolishTag[],
+    polishTags = [],
     debug = false,
     exclude,
     processor,
