@@ -32,3 +32,13 @@ export interface PolishTag {
   tag: string
   polish: PolishCallback
 }
+
+export interface TransformOptions {
+  beforeTransform?: () => void
+}
+
+export type TransformFn = (
+  code: string,
+  polishTags: PolishTag[],
+  options?: TransformOptions,
+) => string
