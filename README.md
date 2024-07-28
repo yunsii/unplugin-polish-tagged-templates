@@ -69,9 +69,12 @@ function Component() {
 }
 ```
 
-However, there is no effect if tagged templates has any variables.
+However, there is no effect if tagged templates has any expressions.
 
 This plugin make you free to use tagged templates to composite class name or others aims, and remove unnecessary tagged templates at compile time.
+
+> [!TIP]
+> For better compile performance, you'd better reduce using nested tagged templates as much as possible.
 
 ## Install
 
