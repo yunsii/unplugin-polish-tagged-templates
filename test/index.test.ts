@@ -1,30 +1,27 @@
-/* eslint-disable no-console */
 /// <reference types="vite/client" />
 
 import { describe, expect, it } from 'vitest'
 
 import { transformTags } from '../src/helpers/transform'
 
-const clsFixtures = import.meta.glob('./fixtures/cls-tags/*.txt', {
+const clsFixtures = import.meta.glob('./fixtures/cls-tags/*.*', {
   eager: true,
   as: 'raw',
 })
 
 describe('cls-tags', () => {
-  console.time('old')
   Object.entries(clsFixtures)
     .filter(([path]) => {
-      return !path.endsWith('.output.txt')
+      return path.includes('.output.')
     })
-    .forEach(([path, code]) => {
-      it(path, () => {
-        const expectedOutputCode =
-          clsFixtures[path.replace('.txt', '.output.txt')]
-        const polishCode = transformTags(code, {
+    .forEach(([outputPath, expectedOutputCode]) => {
+      const inputPath = outputPath.replace('.output.', '.')
+      it(inputPath, () => {
+        const inputCode = clsFixtures[inputPath]
+        const polishCode = transformTags(inputCode, {
           clsTags: ['cls'],
         })
         expect(polishCode).equal(expectedOutputCode)
       })
     })
-  console.timeEnd('old')
 })

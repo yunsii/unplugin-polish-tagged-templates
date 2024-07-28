@@ -2,3 +2,4 @@ pnpm-lock.yaml
 *.lock
 LICENSE
 README.md
+fixtures

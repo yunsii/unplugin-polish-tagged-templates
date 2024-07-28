@@ -1,26 +1,9 @@
-import MagicString from 'magic-string'
+import $ from 'gogocode'
 
 import { polishClsString } from '../presets'
+import { logger } from '../log'
 
 import type { PolishCallback, PolishTag } from '../types'
-
-// toString(): /(?<!\\)`((\r\n|\r|\n|.)*?)(?<!\\)`/gm
-// source: (?<!\\)`((\r\n|\r|\n|.)*?)(?<!\\)`
-export const templateRegExp = /(?<!\\)`((\r\n|\r|\n|.)*?)(?<!\\)`/gm
-
-export function getTaggedTemplatesRegExp(tags: string[]) {
-  return new RegExp(`(${tags.join('|')})${templateRegExp.source}`, 'gm')
-}
-
-export function templateStringContainsExpression(str: string) {
-  const reg = /(?<!\\)\${.*}/gm
-  return reg.test(str)
-}
-
-export function unescapeTemplateString(str: string) {
-  const reg = /\\(.)/gm
-  return str.replace(reg, '$1')
-}
 
 export interface ITransformOptions {
   clsTags?: string[]
@@ -46,31 +29,51 @@ export function transformTags(code: string, options: ITransformOptions = {}) {
     {} as { [k: string]: PolishCallback },
   )
   const tags = Object.keys(mergedPolishTags)
+  const parseReg = new RegExp(`(${tags.join('|')})\``, 'gm')
 
-  const ms = new MagicString(code)
+  // Ensure code safisfy basic condition at least, then parse it.
+  if (!parseReg.test(code)) {
+    return code
+  }
 
-  let transformed = false
+  // demo ref: https://play.gogocode.io/#code/N4IglgdgDgrgLgYQPYBMCmIBcIDGAbAZwAMALNPPJAHQgAJaBDAlAMxvqqrhoYHc0WaXiyI0xEfMTIVqdRszZyAJMACMAXx79BwoiAA0IXkgBOAa2TosIFjAlwwSOnBMMIBFqYC2AChZg8NABJCE99RigwcKQoBycCAEpaYHZaHHi4WiVaAF4IsAA6AHMkEvT0VPT3TIIkGBMcNFzaf0CQzwLa+sbUkzQ4erolHy6GtATU+gL-CBQfIklOIiUAfSUCFyWiCbkptAYcEh8fMDg0L3DIdAAPJJyAPmTJ+lowFloTs68CrwY4Q86LgKgQgRTgJFoj1USRSuxe9D6AxMEGe9E0cPoVVqgWBpR8AHIiv18Zcvjt4Zj4kgcZQigS-i4Sa8vj8-gCNiYANoABgAuuSKViai5IEVmqdzqz-iRAVy+QUAG4MPAwNDiCnMyV9KB4A5oABCAE95lQQCoOaLOjrTgTOBB8QlWVBPudco8Jd8Rb4Eo7WmcTD59UhqfsII6AFZISAE2gOzQgbbPdQCqYmYNwHwp2jFNAQNCuM6Z1IAemLtERg1ohrqJloLjcHm8aBQaVQTTIfRo6IM4Gg8AAMm4itY4IaoGgCDgTGBYj2SEwAAqIhz5rAsZUENCGAgwABGADUwEIACpjjDYFxoDDqIA
+  const ast = $(code)
+  const targetTags = ast.find(
+    tags.map((tag) => {
+      return `${tag}\`$_$str\``
+    }),
+  )
 
-  ms.replace(getTaggedTemplatesRegExp(tags), (raw, tag, str) => {
-    const polishCallback = mergedPolishTags[tag]
+  if (!targetTags.length) {
+    return code
+  }
 
-    if (!polishCallback) {
-      return raw
-    }
+  beforeTransform?.()
+  logger.debug('With', targetTags.length, 'tag(s)')
 
-    if (templateStringContainsExpression(str)) {
-      return raw
-    }
+  const polishCode = targetTags
+    .each((node) => {
+      if (node.match.str.length > 1) {
+        return
+      }
+      const tag = node.attr('tag.name')
 
-    if (!transformed) {
-      beforeTransform?.()
-      transformed = true
-    }
+      if (typeof tag !== 'string') {
+        return
+      }
 
-    const polishedStr = polishCallback(unescapeTemplateString(str.trim()))
-    const result = polishedStr ? `"${polishedStr}"` : raw
-    return result
-  })
+      const polishCallback = mergedPolishTags[tag]
 
-  return ms.hasChanged() ? ms.toString() : code
+      if (!polishCallback) {
+        return
+      }
+
+      const str = node.match.str[0].value
+      const polishedStr = polishCallback(str)?.trim()
+
+      node.replaceBy(`"${polishedStr || ''}"`)
+    })
+    .root()
+    .generate()
+  return polishCode
 }
