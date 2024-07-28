@@ -53,10 +53,10 @@ describe('all', () => {
       const inputPath = outputPath.replace('.output.', '.')
       it(inputPath, () => {
         const inputCode = allFixtures[inputPath]
-        const polishCode = transformTags(inputCode, {
+        const polishResult = transformTags(inputCode, {
           clsTags: ['cls'],
         })
-        expect(polishCode).equal(expectedOutputCode)
+        expect(polishResult?.code).equal(expectedOutputCode)
       })
     })
 })
