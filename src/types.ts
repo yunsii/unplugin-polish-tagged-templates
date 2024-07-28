@@ -24,6 +24,8 @@ export interface Options {
   debug?: boolean
   /** Custom exclude for better performance */
   exclude?: (id: string) => boolean
+  /** Custom processor, default auto */
+  processor?: (id: string) => ProcessorType
 }
 
 export type PolishCallback = (str: string) => string | void
@@ -42,3 +44,5 @@ export type TransformFn = (
   polishTags: PolishTag[],
   options?: TransformOptions,
 ) => string
+
+export type ProcessorType = 'ast' | 'string' | 'auto'

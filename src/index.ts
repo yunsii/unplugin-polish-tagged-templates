@@ -17,6 +17,7 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (
     polishTags = [] as PolishTag[],
     debug = false,
     exclude,
+    processor,
   } = options || {}
 
   if (debug) {
@@ -43,19 +44,28 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (
       return extensions.some((item) => id.endsWith(`.${item}`))
     },
     transform(code, id) {
+      const normalizedId = pathe.normalize(id)
       try {
-        const polishCode = transformTags(code, {
+        const polishResult = transformTags(code, {
           clsTags,
           polishTags,
           beforeTransform: () => {
-            logger.debug('Transform', pathe.normalize(id))
+            logger.debug('Transform', normalizedId)
           },
+          processor: processor ? processor(normalizedId) : 'auto',
         })
 
-        return polishCode
+        if (!polishResult) {
+          logger.debug('No transform required', normalizedId)
+          return code
+        }
+
+        logger.debug('Transformed by', polishResult.type)
+        return polishResult.code
       } catch (err) {
-        logger.debug('polish failed with', pathe.normalize(id))
+        logger.warn('Transform failed', normalizedId)
       }
+      return code
     },
   }
 }
