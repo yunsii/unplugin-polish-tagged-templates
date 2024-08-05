@@ -1,17 +1,10 @@
-const a = cls``
+const a = ""
 
-const b = cls`
+const b = ""
 
-`
+const c = "relative"
 
-const c = cls`relative`
-
-const d = cls`relative
-  \${foo}
-  \${
-    bar
-  }
-`
+const d = "relative ${foo} ${ bar }"
 
 const e = cls`relative
   ${foo}

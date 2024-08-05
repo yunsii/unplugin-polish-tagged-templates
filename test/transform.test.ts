@@ -44,7 +44,7 @@ describe('nested', () => {
     })
 })
 
-describe('all', () => {
+describe.skip('all', () => {
   Object.entries(allFixtures)
     .filter(([path]) => {
       return path.includes('.output.')

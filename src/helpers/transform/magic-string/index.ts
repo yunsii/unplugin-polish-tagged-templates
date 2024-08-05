@@ -38,7 +38,7 @@ export const transformByMagicString: TransformFn = (
     }
 
     const polishedStr = polishCallback(unescapeTemplateString(str.trim()))
-    const result = polishedStr ? `"${polishedStr}"` : raw
+    const result = typeof polishedStr === 'string' ? `"${polishedStr}"` : raw
     return result
   })
 

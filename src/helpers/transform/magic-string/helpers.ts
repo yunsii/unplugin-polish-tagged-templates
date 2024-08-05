@@ -8,8 +8,13 @@ export function getTaggedTemplatesRegExp(tags: string[]) {
   return new RegExp(`(${tags.join('|')})${templateRegExp.source}`, 'gm')
 }
 
+// templateExpressionRegExp.test("${item.value} size-4 shrink-0 md:h-5 md:w-6") // => false
+// templateExpressionRegExp.test(" ${item.value} size-4 shrink-0 md:h-5 md:w-6") // => true
+// '${item.value} size-4 shrink-0 md:h-5 md:w-6'.match(templateExpressionRegExp) // => ['${item.value}']
 export function templateStringContainsExpression(str: string) {
-  return templateExpressionRegExp.test(str)
+  const result = str.match(templateExpressionRegExp)
+
+  return result && !!result.length
 }
 
 export function unescapeTemplateString(str: string) {

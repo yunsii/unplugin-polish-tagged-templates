@@ -8,6 +8,7 @@ import {
   getTaggedTemplatesRegExp,
   templateRegExp,
 } from '../src/helpers/transform/magic-string/helpers'
+import { transformTags } from '../src/helpers/transform'
 
 const templatesFixture = import.meta.glob('./fixtures/magic-string/*.js', {
   eager: true,
@@ -16,7 +17,7 @@ const templatesFixture = import.meta.glob('./fixtures/magic-string/*.js', {
 
 const config = [
   { file: 'base.js', count: 5, reg: templateRegExp },
-  { file: 'cls-tagged.js', count: 5, reg: getTaggedTemplatesRegExp(['cls']) },
+  { file: 'cls-tagged.js', count: 6, reg: getTaggedTemplatesRegExp(['cls']) },
 ]
 
 describe('base', () => {
@@ -53,4 +54,27 @@ describe('nested', () => {
       expect(getTaggedTemplatesRegExp(['cls']).test(code)).equal(true)
     })
   })
+})
+
+const allFixtures = import.meta.glob('./fixtures/magic-string/**/*.*', {
+  eager: true,
+  as: 'raw',
+})
+
+describe('output', () => {
+  Object.entries(allFixtures)
+    .filter(([path]) => {
+      return path.includes('.output.')
+    })
+    .forEach(([outputPath, expectedOutputCode]) => {
+      const inputPath = outputPath.replace('.output.', '.')
+      it(inputPath, () => {
+        const inputCode = allFixtures[inputPath]
+        const polishResult = transformTags(inputCode, {
+          clsTags: ['cls'],
+          processor: 'string',
+        })
+        expect(polishResult?.code).equal(expectedOutputCode)
+      })
+    })
 })
