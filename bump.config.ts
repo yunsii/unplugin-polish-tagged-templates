@@ -1,5 +1,5 @@
 import { defineConfig } from 'bumpp'
 
 export default defineConfig({
-  commit: 'release: %s',
+  commit: 'chore: release %s',
 })
