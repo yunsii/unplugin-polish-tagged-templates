@@ -3,7 +3,6 @@ import MagicString from 'magic-string'
 import {
   getTaggedTemplatesRegExp,
   templateStringContainsExpression,
-  unescapeTemplateString,
 } from './helpers'
 
 import type { TransformFn } from '../../../types'
@@ -32,12 +31,17 @@ export const transformByMagicString: TransformFn = (
       return raw
     }
 
+    // TODO process single/double quotes
+    if (str.includes('"')) {
+      return raw
+    }
+
     if (!transformed) {
       beforeTransform?.()
       transformed = true
     }
 
-    const polishedStr = polishCallback(unescapeTemplateString(str.trim()))
+    const polishedStr = polishCallback(str.trim())
     const result = typeof polishedStr === 'string' ? `"${polishedStr}"` : raw
     return result
   })

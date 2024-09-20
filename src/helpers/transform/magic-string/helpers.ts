@@ -17,11 +17,6 @@ export function templateStringContainsExpression(str: string) {
   return result && !!result.length
 }
 
-export function unescapeTemplateString(str: string) {
-  const reg = /\\(.)/g
-  return str.replace(reg, '$1')
-}
-
 export function containsTaggedTemplate(tags: string[], str: string) {
   const parseReg = new RegExp(`(${tags.join('|')})\``, 'gm')
   return parseReg.test(str)

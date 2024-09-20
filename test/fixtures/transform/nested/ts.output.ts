@@ -8,5 +8,3 @@ const className2 = cls`
   text-sky-500
   hover:text-sky-600
 `
-
-const className3: string = "bg-f-bg-container h-full p-8 [&_[class*=\"form-item-label\"]>label]:text-sm [&_[class*=\"form-item-label\"]>label]:font-semibold"

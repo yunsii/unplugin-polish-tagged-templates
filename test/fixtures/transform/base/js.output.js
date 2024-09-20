@@ -1,4 +1,4 @@
-const className = "cursor-pointer font-bold text-xl text-sky-500 hover:text-sky-600 `test"
+const className = "cursor-pointer font-bold text-xl text-sky-500 hover:text-sky-600 \`test"
 
 const className2 = cls`
   cursor-pointer

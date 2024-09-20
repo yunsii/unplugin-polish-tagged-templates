@@ -4,7 +4,7 @@ const b = ""
 
 const c = "relative"
 
-const d = "relative ${foo} ${ bar }"
+const d = "relative \${foo} \${ bar }"
 
 const e = cls`relative
   ${foo}

@@ -1,4 +1,3 @@
-import t from '@babel/types'
 import $ from 'gogocode'
 
 import { logger } from '../../../log'
@@ -45,10 +44,15 @@ export const transformByAst: TransformFn = (code, polishTags, options = {}) => {
       }
 
       const str = node.match.str[0].value
+
+      // TODO process single/double quotes
+      if (str.includes('"')) {
+        return
+      }
+
       const polishedStr = polishCallback(str)?.trim() || ''
 
-      // Use t.stringLiteral to avoid escaping
-      node.replaceBy(t.stringLiteral(polishedStr))
+      node.replaceBy(`"${polishedStr}"`)
     })
     .root()
     .generate()
