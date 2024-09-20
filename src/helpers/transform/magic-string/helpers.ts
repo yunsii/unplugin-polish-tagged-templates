@@ -1,8 +1,8 @@
 // toString(): /(?<!\\)`((\r\n|\r|\n|.)*?)(?<!\\)`/gm
 // source: (?<!\\)`((\r\n|\r|\n|.)*?)(?<!\\)`
-export const templateRegExp = /(?<!\\)`((\r\n|\r|\n|.)*?)(?<!\\)`/gm
+export const templateRegExp = /(?<!\\)`((\r\n|[\r\n]|.)*?)(?<!\\)`/g
 
-export const templateExpressionRegExp = /(?<!\\)\${((\r\n|\r|\n|.)*?)}/gm
+export const templateExpressionRegExp = /(?<!\\)\$\{((\r\n|[\r\n]|.)*?)\}/g
 
 export function getTaggedTemplatesRegExp(tags: string[]) {
   return new RegExp(`(${tags.join('|')})${templateRegExp.source}`, 'gm')
@@ -18,7 +18,7 @@ export function templateStringContainsExpression(str: string) {
 }
 
 export function unescapeTemplateString(str: string) {
-  const reg = /\\(.)/gm
+  const reg = /\\(.)/g
   return str.replace(reg, '$1')
 }
 

@@ -1,11 +1,10 @@
 import { polishClsString } from '../../presets'
-
+import { transformByAst } from './ast'
+import { transformByMagicString } from './magic-string'
 import {
   checkTemplateNested,
   containsTaggedTemplate,
 } from './magic-string/helpers'
-import { transformByMagicString } from './magic-string'
-import { transformByAst } from './ast'
 
 import type { PolishTag, ProcessorType } from '../../types'
 
@@ -39,8 +38,8 @@ export function transformTags(code: string, options: ITransformOptions = {}) {
     return
   }
 
-  const processorType =
-    processor === 'auto'
+  const processorType
+    = processor === 'auto'
       ? checkTemplateNested(code)
         ? 'ast'
         : 'string'

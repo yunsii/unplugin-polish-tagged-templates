@@ -55,12 +55,12 @@ function Component() {
 to
 
 ```tsx
-const className = "cursor-pointer font-bold text-xl text-sky-500 hover:text-sky-600"
+const className = 'cursor-pointer font-bold text-xl text-sky-500 hover:text-sky-600'
 
 function Component() {
   return (
     <p
-      className={"cursor-pointer font-bold text-xl text-sky-500 hover:text-sky-600"}
+      className='cursor-pointer font-bold text-xl text-sky-500 hover:text-sky-600'
       // ...
     >
       Hi
@@ -193,4 +193,4 @@ build({
 
 ## Related
 
-* [tagged-classnames-free](https://github.com/yunsii/tagged-classnames-free) - Free to tagged classnames.
+- [tagged-classnames-free](https://github.com/yunsii/tagged-classnames-free) - Free to tagged classnames.

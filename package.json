@@ -24,38 +24,38 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "require": "./dist/index.cjs",
-      "import": "./dist/index.js"
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
     },
     "./vite": {
       "types": "./dist/vite.d.ts",
-      "require": "./dist/vite.cjs",
-      "import": "./dist/vite.js"
+      "import": "./dist/vite.js",
+      "require": "./dist/vite.cjs"
     },
     "./webpack": {
       "types": "./dist/webpack.d.ts",
-      "require": "./dist/webpack.cjs",
-      "import": "./dist/webpack.js"
+      "import": "./dist/webpack.js",
+      "require": "./dist/webpack.cjs"
     },
     "./rollup": {
       "types": "./dist/rollup.d.ts",
-      "require": "./dist/rollup.cjs",
-      "import": "./dist/rollup.js"
+      "import": "./dist/rollup.js",
+      "require": "./dist/rollup.cjs"
     },
     "./esbuild": {
       "types": "./dist/esbuild.d.ts",
-      "require": "./dist/esbuild.cjs",
-      "import": "./dist/esbuild.js"
+      "import": "./dist/esbuild.js",
+      "require": "./dist/esbuild.cjs"
     },
     "./nuxt": {
       "types": "./dist/nuxt.d.ts",
-      "require": "./dist/nuxt.cjs",
-      "import": "./dist/nuxt.js"
+      "import": "./dist/nuxt.js",
+      "require": "./dist/nuxt.cjs"
     },
     "./types": {
       "types": "./dist/types.d.ts",
-      "require": "./dist/types.cjs",
-      "import": "./dist/types.js"
+      "import": "./dist/types.js",
+      "require": "./dist/types.cjs"
     },
     "./*": "./*"
   },
@@ -77,17 +77,14 @@
     "build": "tsup",
     "dev": "tsup --watch src",
     "build:fix": "esno scripts/postbuild.ts",
-    "lint": "eslint --cache --ext .js,.jsx,.ts,.tsx .",
+    "lint": "eslint --flag unstable_ts_config .",
     "play": "npm -C playground run dev",
     "prepublishOnly": "npm run build",
     "release": "bumpp && npm publish",
     "start": "esno src/index.ts",
     "test": "vitest",
-    "prepare": "husky install",
-    "lint-staged": "lint-staged",
-    "lint-staged:lint": "eslint",
-    "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx .",
-    "prettier": "prettier --check --write --no-plugin-search \"**/*.(js|jsx|tsx|ts|css|less|scss|sass|md|yaml)\""
+    "prepare": "husky init",
+    "lint:fix": "eslint --flag unstable_ts_config --fix ."
   },
   "peerDependencies": {
     "@nuxt/kit": "^3",
@@ -98,7 +95,13 @@
     "webpack": "^4 || ^5"
   },
   "peerDependenciesMeta": {
-    "webpack": {
+    "@nuxt/kit": {
+      "optional": true
+    },
+    "@nuxt/schema": {
+      "optional": true
+    },
+    "esbuild": {
       "optional": true
     },
     "rollup": {
@@ -107,13 +110,7 @@
     "vite": {
       "optional": true
     },
-    "esbuild": {
-      "optional": true
-    },
-    "@nuxt/kit": {
-      "optional": true
-    },
-    "@nuxt/schema": {
+    "webpack": {
       "optional": true
     }
   },
@@ -125,23 +122,26 @@
     "unplugin": "^1.12.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.35.3",
-    "@antfu/eslint-config-react": "^0.35.3",
-    "@commitlint/cli": "^17.7.1",
-    "@commitlint/config-conventional": "^17.7.0",
-    "@commitlint/types": "^17.4.4",
-    "@jannajs/lint": "^2.3.8",
+    "@antfu/eslint-config": "^3.6.2",
+    "@commitlint/cli": "^19.5.0",
+    "@commitlint/config-conventional": "^19.5.0",
+    "@commitlint/types": "^19.5.0",
+    "@eslint-react/eslint-plugin": "^1.14.1",
+    "@jannajs/lint": "3.0.0-next.20",
     "@nuxt/kit": "^3.6.5",
     "@nuxt/schema": "^3.6.5",
     "@types/node": "^20.5.2",
     "bumpp": "9.4.1",
     "chalk": "^5.3.0",
     "clsx": "^2.1.1",
-    "eslint": "^8.47.0",
-    "eslint-config-prettier": "^8.10.0",
+    "eslint": "^9.10.0",
+    "eslint-plugin-format": "^0.1.2",
+    "eslint-plugin-react-hooks": "5.1.0-rc-fb9a90fa48-20240614",
+    "eslint-plugin-react-refresh": "^0.4.12",
     "esno": "^0.17.0",
     "fast-glob": "^3.3.1",
-    "lint-staged": "^13.3.0",
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
     "nodemon": "^3.0.1",
     "prettier": "^3.0.2",
     "rimraf": "^5.0.1",
@@ -153,9 +153,6 @@
     "webpack": "^5.88.2"
   },
   "lint-staged": {
-    "**/*.{js,jsx,ts,tsx}": "npm run lint-staged:lint",
-    "**/*.{js,jsx,tsx,ts,css,less,scss,sass,md,yaml}": [
-      "prettier --write --no-plugin-search"
-    ]
+    "*": "eslint --flag unstable_ts_config --fix"
   }
 }

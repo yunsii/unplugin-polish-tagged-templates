@@ -1,11 +1,12 @@
-import { createUnplugin } from 'unplugin'
 import pathe from 'pathe'
-
-import { IS_DEV, PLUGIN_NAME } from './constants'
-import { logger } from './log'
-import { transformTags } from './helpers/transform'
+import { createUnplugin } from 'unplugin'
 
 import type { UnpluginFactory } from 'unplugin'
+
+import { IS_DEV, PLUGIN_NAME } from './constants'
+import { transformTags } from './helpers/transform'
+import { logger } from './log'
+
 import type { Options } from './types'
 
 export const unpluginFactory: UnpluginFactory<Options | undefined> = (

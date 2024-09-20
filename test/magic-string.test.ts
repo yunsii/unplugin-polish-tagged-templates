@@ -1,14 +1,14 @@
 /// <reference types="vite/client" />
 
-import path from 'path'
+import path from 'node:path'
 
 import { describe, expect, it } from 'vitest'
 
+import { transformTags } from '../src/helpers/transform'
 import {
   getTaggedTemplatesRegExp,
   templateRegExp,
 } from '../src/helpers/transform/magic-string/helpers'
-import { transformTags } from '../src/helpers/transform'
 
 const templatesFixture = import.meta.glob('./fixtures/magic-string/*.js', {
   eager: true,

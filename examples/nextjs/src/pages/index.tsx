@@ -1,8 +1,7 @@
+import { raw } from '@/helpers/tags'
 import { useState } from 'react'
 
 import type { NextPage } from 'next'
-
-import { raw } from '@/helpers/tags'
 
 const Home: NextPage = () => {
   const [count, setCount] = useState(0)
@@ -11,12 +10,16 @@ const Home: NextPage = () => {
 
   return (
     <main className={mainClassName}>
-      <button onClick={() => setCount(count + 1)}>click {count}</button>
+      <button type='button' onClick={() => setCount(count + 1)}>
+        click
+        {count}
+      </button>
       <p
-        className={raw`cursor-pointer
-          font-bold text-xl
-          text-sky-500
-          hover:text-sky-600
+        className={raw`
+          cursor-pointer
+                    font-bold text-xl
+                    text-sky-500
+                    hover:text-sky-600
         `}
       >
         Hello, world

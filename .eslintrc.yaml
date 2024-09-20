@@ -1,5 +1,0 @@
-root: true
-extends:
-  - ./node_modules/@jannajs/lint/dist/eslint.cjs
-rules:
-  unused-imports/no-unused-vars: 'off'
