@@ -19,6 +19,15 @@ const Home: NextPage = () => {
       >
         Hello, world
       </p>
+      <p
+        className={cls`
+          bg-f-bg-container h-full
+          p-8 [&_[class*="form-item-label"]>label]:text-sm
+          [&_[class*="form-item-label"]>label]:font-semibold
+        `}
+      >
+        Hello, world 2
+      </p>
     </main>
   );
 }

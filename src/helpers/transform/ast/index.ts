@@ -1,3 +1,4 @@
+import t from '@babel/types'
 import $ from 'gogocode'
 
 import { logger } from '../../../log'
@@ -44,9 +45,10 @@ export const transformByAst: TransformFn = (code, polishTags, options = {}) => {
       }
 
       const str = node.match.str[0].value
-      const polishedStr = polishCallback(str)?.trim()
+      const polishedStr = polishCallback(str)?.trim() || ''
 
-      node.replaceBy(`"${polishedStr || ''}"`)
+      // Use t.stringLiteral to avoid escaping
+      node.replaceBy(t.stringLiteral(polishedStr))
     })
     .root()
     .generate()

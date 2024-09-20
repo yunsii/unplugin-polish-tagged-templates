@@ -17,9 +17,9 @@ const Home: NextPage = () => {
       <p
         className={raw`
           cursor-pointer
-                    font-bold text-xl
-                    text-sky-500
-                    hover:text-sky-600
+          font-bold text-xl
+          text-sky-500
+          hover:text-sky-600
         `}
       >
         Hello, world

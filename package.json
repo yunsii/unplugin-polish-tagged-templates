@@ -115,6 +115,7 @@
     }
   },
   "dependencies": {
+    "@babel/types": "^7.25.6",
     "consola": "^3.2.3",
     "gogocode": "^1.0.55",
     "magic-string": "^0.30.10",
